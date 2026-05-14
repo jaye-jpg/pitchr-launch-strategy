@@ -511,16 +511,15 @@ export default function App() {
   const goTo = (index) => setCur(Math.max(0, Math.min(tabs.length - 1, index)));
 
   return (
-    <main className="min-h-screen bg-[#050505] px-1 py-8 text-white antialiased md:py-10">
+    <main className="min-h-screen bg-[#050505] px-3 py-8 text-white antialiased md:px-4 md:py-10">
       <style>{`@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap'); * { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; } @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }`}</style>
-      <div className="mx-auto w-full max-w-[calc(100vw-16px)] overflow-hidden rounded-[34px] border border-[#A6FF00]/20 bg-[#080808] shadow-2xl shadow-black/60">
-        <section className="relative overflow-hidden border-b border-[#A6FF00]/15 px-4 py-10 md:px-6 md:py-14">
+      <div className="mx-auto w-full max-w-[calc(100vw-32px)] overflow-hidden rounded-[34px] border border-[#A6FF00]/20 bg-[#080808] shadow-2xl shadow-black/60">
+        <section className="relative overflow-hidden border-b border-[#A6FF00]/15 px-4 py-8 md:px-6 md:py-10">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_12%,rgba(166,255,0,0.18),transparent_32%),radial-gradient(circle_at_10%_80%,rgba(166,255,0,0.08),transparent_34%),linear-gradient(180deg,rgba(255,255,255,0.02),transparent)]" />
           <div className="relative">
             <div className="absolute right-0 top-0 text-3xl font-black tracking-[-0.06em] text-white">Pitchr<span className="text-[#A6FF00]">.</span></div>
             <div className="mb-6 inline-flex items-center gap-1 rounded-full border border-[#A6FF00]/40 bg-[#A6FF00]/10 px-2.5 py-1 text-[10px] font-semibold text-[#A6FF00]"><span className="h-1 w-1 rounded-full bg-[#A6FF00]" />3-month launch campaign | June 1 - August 31</div>
             <h1 className="max-w-4xl text-5xl font-black leading-[0.9] tracking-[-0.07em] text-white md:text-7xl">Pitchr Launch Strategy</h1>
-            <p className="mt-6 max-w-3xl text-base font-medium leading-7 text-white/60">Design note: this document is the source of truth for the launch. Each numbered section is modular - designed to be laid out as its own slide, spread, or section in the final design deck.</p>
           </div>
         </section>
         <nav className="flex overflow-x-auto border-b border-[#A6FF00]/15 bg-[#050505] px-2.5 md:px-4" aria-label="Guide navigation">
