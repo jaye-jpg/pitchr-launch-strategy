@@ -35,6 +35,20 @@
           "Total Q1": ["Total Q1", "50-90", "20", "+500"]
         };
 
+        const dueOrder = {
+          "Mid-May": 10,
+          "Late May": 20,
+          "May 27": 27,
+          "Before June 1": 29,
+          "June 1": 31,
+          "June 8": 38,
+          "June": 45,
+          "Weekly from June": 50,
+          "Weekly June-August": 55,
+          "Monthly": 60,
+          "Mid-July": 70
+        };
+
         function patchKpiRows() {
           const divs = Array.from(document.querySelectorAll("div"));
           divs.forEach((cell) => {
@@ -50,10 +64,38 @@
           });
         }
 
-        const observer = new MutationObserver(patchKpiRows);
+        function sortProductionSchedule() {
+          const candidates = Array.from(document.querySelectorAll("div.grid"));
+          const header = candidates.find((el) => {
+            const cells = Array.from(el.children).map((child) => child.textContent.trim());
+            return cells.length === 5 && cells[0] === "Channel" && cells[1] === "Deliverable" && cells[2] === "Detail" && cells[3] === "Due" && cells[4] === "Owner";
+          });
+          if (!header || !header.parentElement) return;
+
+          const table = header.parentElement;
+          const rows = Array.from(table.children).slice(1).filter((row) => row.children && row.children.length === 5);
+          if (rows.length < 2) return;
+
+          const sorted = [...rows].sort((a, b) => {
+            const dueA = a.children[3].textContent.trim();
+            const dueB = b.children[3].textContent.trim();
+            return (dueOrder[dueA] || 999) - (dueOrder[dueB] || 999);
+          });
+
+          const isAlreadySorted = rows.every((row, index) => row === sorted[index]);
+          if (isAlreadySorted) return;
+          sorted.forEach((row) => table.appendChild(row));
+        }
+
+        function patchPage() {
+          patchKpiRows();
+          sortProductionSchedule();
+        }
+
+        const observer = new MutationObserver(patchPage);
         observer.observe(document.documentElement, { childList: true, subtree: true });
-        window.addEventListener("load", patchKpiRows);
-        setInterval(patchKpiRows, 500);
+        window.addEventListener("load", patchPage);
+        setInterval(patchPage, 500);
       })();
     </script>
   </body>
