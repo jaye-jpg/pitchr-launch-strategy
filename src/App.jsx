@@ -266,18 +266,18 @@ function Eyebrow({ children }) {
 }
 
 function Heading({ children }) {
-  return <h2 className="text-4xl font-black leading-[0.92] tracking-[-0.065em] text-white md:text-6xl">{children}</h2>;
+  return <h2 className="max-w-5xl text-3xl font-extrabold leading-[1.02] tracking-[-0.045em] text-white md:text-5xl">{children}</h2>;
 }
 
 function Intro({ children }) {
-  return <p className="mt-5 max-w-4xl text-sm font-medium leading-7 text-white/60">{children}</p>;
+  return <p className="mt-4 max-w-5xl text-sm font-normal leading-6 text-white/58">{children}</p>;
 }
 
 function Shell({ eyebrow, title, intro, children }) {
   return (
     <div className="relative min-h-full overflow-y-auto bg-[#050505]">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_82%_20%,rgba(166,255,0,0.12),transparent_34%),linear-gradient(180deg,rgba(255,255,255,0.025),transparent)]" />
-      <div className="relative z-10 p-4 md:p-5">
+      <div className="relative z-10 px-4 py-5 md:px-6 md:py-6">
         <Eyebrow>{eyebrow}</Eyebrow>
         <Heading>{title}</Heading>
         <Intro>{intro}</Intro>
@@ -291,9 +291,9 @@ function Card({ title, children, highlight = false }) {
   const cardClass = highlight ? 'border-[#A6FF00] bg-[#A6FF00] text-black' : 'border-[#A6FF00]/20 bg-white/[0.035] text-white';
   const bodyClass = highlight ? 'text-black/70' : 'text-white/55';
   return (
-    <div className={`rounded-[1.5rem] border p-6 ${cardClass}`}>
-      <h3 className="text-lg font-black tracking-[-0.04em]">{title}</h3>
-      <div className={`mt-3 text-xs font-medium leading-5 ${bodyClass}`}>{children}</div>
+    <div className={`rounded-[1.25rem] border p-5 ${cardClass}`}>
+      <h3 className="text-base font-bold leading-snug tracking-[-0.025em]">{title}</h3>
+      <div className={`mt-3 text-[13px] font-normal leading-5 ${bodyClass}`}>{children}</div>
     </div>
   );
 }
@@ -303,14 +303,14 @@ function Table({ columns, rows, highlightLast = false }) {
   return (
     <div className="mt-5 overflow-x-auto rounded-[1.5rem] border border-[#A6FF00]/20 bg-white/[0.035]">
       <div className="min-w-[760px]">
-        <div className="grid gap-3 border-b border-[#A6FF00]/10 p-5 text-[10px] font-black uppercase tracking-[0.16em] text-[#A6FF00]" style={{ gridTemplateColumns }}>
+        <div className="grid gap-3 border-b border-[#A6FF00]/10 p-4 text-[10px] font-bold uppercase tracking-[0.14em] text-[#A6FF00]" style={{ gridTemplateColumns }}>
           {columns.map((col) => <div key={col}>{col}</div>)}
         </div>
         {rows.map((row, index) => {
           const rowClass = highlightLast && index === rows.length - 1 ? 'bg-[#A6FF00] text-black' : 'text-white';
           return (
-            <div key={`${row[0]}-${index}`} className={`grid gap-3 border-b border-[#A6FF00]/10 p-5 last:border-b-0 ${rowClass}`} style={{ gridTemplateColumns }}>
-              {row.map((cell, cellIndex) => <div key={`${cell}-${cellIndex}`} className="text-xs font-bold leading-5">{cell}</div>)}
+            <div key={`${row[0]}-${index}`} className={`grid gap-3 border-b border-[#A6FF00]/10 p-4 last:border-b-0 ${rowClass}`} style={{ gridTemplateColumns }}>
+              {row.map((cell, cellIndex) => <div key={`${cell}-${cellIndex}`} className="text-[13px] font-medium leading-5">{cell}</div>)}
             </div>
           );
         })}
@@ -324,14 +324,14 @@ function BulletList({ items }) {
 }
 
 function SectionTitle({ children }) {
-  return <h3 className="mt-10 text-2xl font-black tracking-[-0.055em] text-white">{children}</h3>;
+  return <h3 className="mt-8 text-xl font-bold tracking-[-0.035em] text-white">{children}</h3>;
 }
 
 function Overview() {
   return (
     <Shell eyebrow="1. Overview" title="A focused, time-boxed launch campaign." intro="A clear offer, a defined audience, and a measurable target of 20 paying customers by end of August.">
       <SectionTitle>What this is</SectionTitle>
-      <p className="mt-3 max-w-4xl text-sm font-medium leading-7 text-white/60">A focused, time-boxed launch campaign to bring Pitchr to market with a clear offer, a defined audience, and a measurable target of 20 paying customers by end of August.</p>
+      <p className="mt-3 max-w-5xl text-sm font-normal leading-6 text-white/60">A focused, time-boxed launch campaign to bring Pitchr to market with a clear offer, a defined audience, and a measurable target of 20 paying customers by end of August.</p>
       <SectionTitle>The shape of the campaign</SectionTitle>
       <Table columns={['Stage', 'Window', 'What it does']} rows={campaignShape} />
       <Card title="A note on flexibility"><p>If the 20 launch spots fill significantly faster than 3 months, say by end of July, the sustain stage can be deployed earlier at the team&apos;s discretion. The September 1 date is a planning anchor, not a hard date.</p></Card>
@@ -339,11 +339,11 @@ function Overview() {
       <div className="mt-5 grid gap-4 md:grid-cols-2">
         {offers.map((offer) => (
           <Card key={offer.title} title={offer.title} highlight={offer.highlight}>
-            <p className="font-black">{offer.timing}</p>
-            <p className="mt-3 text-xl font-black tracking-[-0.04em]">{offer.headline}</p>
+            <p className="font-semibold">{offer.timing}</p>
+            <p className="mt-3 text-lg font-bold tracking-[-0.03em]">{offer.headline}</p>
             <p className="mt-3">{offer.body}</p>
             <div className="mt-4"><BulletList items={offer.points} /></div>
-            <p className="mt-4 font-bold">{offer.note}</p>
+            <p className="mt-4 font-medium">{offer.note}</p>
           </Card>
         ))}
       </div>
@@ -355,8 +355,8 @@ function Overview() {
       </div>
       <SectionTitle>The One-Sentence Brief</SectionTitle>
       <div className="mt-5 rounded-[2rem] border border-[#A6FF00]/30 bg-white/[0.035] p-8 text-white">
-        <p className="text-3xl font-black leading-[0.98] tracking-[-0.06em]">Pitchr is the third option between hiring a PR agency and doing nothing - and our job in the next 90 days is to make that third option visible, credible, and irresistible to enough growing Australian businesses to land 20 paying customers and 1,500 new contacts.</p>
-        <p className="mt-5 text-xl font-black tracking-[-0.04em] text-[#A6FF00]">Everything else is execution.</p>
+        <p className="text-2xl font-bold leading-tight tracking-[-0.045em]">Pitchr is the third option between hiring a PR agency and doing nothing - and our job in the next 90 days is to make that third option visible, credible, and irresistible to enough growing Australian businesses to land 20 paying customers and 1,500 new contacts.</p>
+        <p className="mt-5 text-lg font-bold tracking-[-0.03em] text-[#A6FF00]">Everything else is execution.</p>
       </div>
     </Shell>
   );
@@ -367,10 +367,10 @@ function GoalsKPIs() {
     <Shell eyebrow="2. Goals & KPIs" title="The marketing function has three jobs in the next 90 days." intro="Everything in this plan ladders to one of these numbers.">
       <SectionTitle>Primary Goals</SectionTitle>
       <div className="mt-5 grid gap-4 md:grid-cols-3">
-        {goals.map(([goal, target, why]) => <Card key={goal} title={goal}><p className="text-3xl font-black tracking-[-0.06em] text-[#A6FF00]">{target}</p><p className="mt-3">{why}</p></Card>)}
+        {goals.map(([goal, target, why]) => <Card key={goal} title={goal}><p className="text-2xl font-bold tracking-[-0.04em] text-[#A6FF00]">{target}</p><p className="mt-3">{why}</p></Card>)}
       </div>
       <SectionTitle>Secondary KPIs</SectionTitle>
-      <p className="mt-3 max-w-4xl text-sm font-medium leading-7 text-white/60">These are the operating metrics. Tracked weekly, used to optimise across the campaign.</p>
+      <p className="mt-3 max-w-5xl text-sm font-normal leading-6 text-white/60">These are the operating metrics. Tracked weekly, used to optimise across the campaign.</p>
       <div className="mt-5 grid gap-3 md:grid-cols-4">{benchmarks.map((item) => <Card key={item} title={item}><span /></Card>)}</div>
       <SectionTitle>Phase-by-phase demo targets</SectionTitle>
       <Table columns={['Phase', 'Demo bookings', 'New customers', 'New contacts']} rows={kpiRows} highlightLast />
@@ -384,10 +384,10 @@ function Messaging() {
   return (
     <Shell eyebrow="3. Key Messaging" title="Every line of copy in every channel should ladder back to something in this section." intro="Pitchr is the modern PR platform built for businesses that need media coverage without the agency overhead.">
       <SectionTitle>Brand Positioning</SectionTitle>
-      <p className="mt-3 max-w-4xl text-sm font-medium leading-7 text-white/60">Pitchr is the modern PR platform built for businesses that need media coverage without the agency overhead.</p>
-      <p className="mt-3 max-w-4xl text-sm font-medium leading-7 text-white/60">It&apos;s not an agency. It&apos;s not DIY. It&apos;s the third option - and the third option is what most of the audience has been waiting for without knowing it exists.</p>
+      <p className="mt-3 max-w-5xl text-sm font-normal leading-6 text-white/60">Pitchr is the modern PR platform built for businesses that need media coverage without the agency overhead.</p>
+      <p className="mt-3 max-w-5xl text-sm font-normal leading-6 text-white/60">It&apos;s not an agency. It&apos;s not DIY. It&apos;s the third option - and the third option is what most of the audience has been waiting for without knowing it exists.</p>
       <SectionTitle>Value Proposition</SectionTitle>
-      <div className="mt-5 rounded-[1.5rem] border border-[#A6FF00]/30 bg-[#A6FF00] p-6 text-black"><div className="text-[10px] font-black uppercase tracking-[0.18em]">Value Proposition</div><div className="mt-2 text-3xl font-black tracking-[-0.065em]">Get covered. Without the retainer, the WIP meetings, or the BS.</div><p className="mt-3 text-sm font-bold text-black/65">Everything Pitchr says should make this promise feel true.</p></div>
+      <div className="mt-5 rounded-[1.5rem] border border-[#A6FF00]/30 bg-[#A6FF00] p-6 text-black"><div className="text-[10px] font-black uppercase tracking-[0.18em]">Value Proposition</div><div className="mt-2 text-2xl font-bold tracking-[-0.045em]">Get covered. Without the retainer, the WIP meetings, or the BS.</div><p className="mt-3 text-sm font-bold text-black/65">Everything Pitchr says should make this promise feel true.</p></div>
       <SectionTitle>The Five Key Messages</SectionTitle>
       <Table columns={['Pillar', 'What it says', 'When to use']} rows={messagingPillars} />
       <SectionTitle>Tone of Voice</SectionTitle>
@@ -395,7 +395,7 @@ function Messaging() {
       <SectionTitle>Banned from Pitchr copy</SectionTitle>
       <div className="mt-5 flex flex-wrap gap-2">{bannedCopy.map((word) => <span key={word} className="rounded-full border border-[#A6FF00]/20 bg-white/[0.035] px-4 py-2 text-xs font-black text-white/60">{word}</span>)}</div>
       <SectionTitle>The Four Campaign Themes</SectionTitle>
-      <div className="mt-5 grid gap-4 md:grid-cols-2">{themes.map(([title, body, lines]) => <Card key={title} title={title}><p>{body}</p><div className="mt-4 space-y-2">{lines.map((line) => <p key={line} className="rounded-2xl bg-black/35 p-3 text-sm font-black tracking-[-0.03em] text-white">{line}</p>)}</div></Card>)}</div>
+      <div className="mt-5 grid gap-4 md:grid-cols-2">{themes.map(([title, body, lines]) => <Card key={title} title={title}><p>{body}</p><div className="mt-4 space-y-2">{lines.map((line) => <p key={line} className="rounded-2xl bg-black/35 p-3 text-sm font-semibold tracking-[-0.02em] text-white">{line}</p>)}</div></Card>)}</div>
     </Shell>
   );
 }
@@ -406,7 +406,7 @@ function Channels() {
       <SectionTitle>Channel Mix at a Glance</SectionTitle>
       <Table columns={['Channel', 'Role', 'Active window', 'Owner']} rows={channelMix} />
       <SectionTitle>Paid Media</SectionTitle>
-      <p className="mt-3 max-w-4xl text-sm font-medium leading-7 text-white/60">The job of paid media is to drive booked demos. Everything else is secondary.</p>
+      <p className="mt-3 max-w-5xl text-sm font-normal leading-6 text-white/60">The job of paid media is to drive booked demos. Everything else is secondary.</p>
       <div className="mt-5 grid gap-4 md:grid-cols-3">{paidTiers.map(([title, label, points], index) => <Card key={title} title={title} highlight={index === 1}><p className="font-black">{label}</p><div className="mt-4"><BulletList items={points} /></div></Card>)}</div>
       <SectionTitle>Tier 2 - Lean ($3,000-$5,000/month) - Recommended</SectionTitle>
       <Table columns={['Platform', 'Monthly spend', 'Role']} rows={paidBudget} />
@@ -418,7 +418,7 @@ function Channels() {
       <SectionTitle>Topic coverage for the 12 launch posts</SectionTitle>
       <div className="mt-5 grid gap-3 md:grid-cols-3">{organicTopics.map((topic) => <Card key={topic} title={topic}><span /></Card>)}</div>
       <SectionTitle>Email</SectionTitle>
-      <p className="mt-3 max-w-4xl text-sm font-medium leading-7 text-white/60">Email is one of Pitchr&apos;s biggest assets. The existing 3,000-person database is a real launch lever - treat it as a primary acquisition channel, not an afterthought.</p>
+      <p className="mt-3 max-w-5xl text-sm font-normal leading-6 text-white/60">Email is one of Pitchr&apos;s biggest assets. The existing 3,000-person database is a real launch lever - treat it as a primary acquisition channel, not an afterthought.</p>
       <div className="mt-5 grid gap-4 md:grid-cols-2">{emailSequences.map(([title, points]) => <Card key={title} title={title}><BulletList items={points} /></Card>)}</div>
       <SectionTitle>Website</SectionTitle>
       <Card title="The website&apos;s job during the launch is conversion"><p>Every paid click, email link, and organic referral lands here and should be moved toward the demo booking.</p></Card>
@@ -511,19 +511,19 @@ export default function App() {
   const goTo = (index) => setCur(Math.max(0, Math.min(tabs.length - 1, index)));
 
   return (
-    <main className="min-h-screen bg-[#050505] px-3 py-8 text-white antialiased md:px-4 md:py-10">
+    <main className="min-h-screen bg-[#050505] px-16 py-8 text-white antialiased md:px-24 md:py-10">
       <style>{`@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap'); * { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; } @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }`}</style>
-      <div className="mx-auto w-full max-w-[calc(100vw-32px)] overflow-hidden rounded-[34px] border border-[#A6FF00]/20 bg-[#080808] shadow-2xl shadow-black/60">
-        <section className="relative overflow-hidden border-b border-[#A6FF00]/15 px-4 py-8 md:px-6 md:py-10">
+      <div className="mx-auto w-full max-w-[calc(100vw-192px)] overflow-hidden rounded-[34px] border border-[#A6FF00]/20 bg-[#080808] shadow-2xl shadow-black/60">
+        <section className="relative overflow-hidden border-b border-[#A6FF00]/15 px-4 py-6 md:px-6 md:py-7">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_12%,rgba(166,255,0,0.18),transparent_32%),radial-gradient(circle_at_10%_80%,rgba(166,255,0,0.08),transparent_34%),linear-gradient(180deg,rgba(255,255,255,0.02),transparent)]" />
           <div className="relative">
-            <div className="absolute right-0 top-0 text-3xl font-black tracking-[-0.06em] text-white">Pitchr<span className="text-[#A6FF00]">.</span></div>
-            <div className="mb-6 inline-flex items-center gap-1 rounded-full border border-[#A6FF00]/40 bg-[#A6FF00]/10 px-2.5 py-1 text-[10px] font-semibold text-[#A6FF00]"><span className="h-1 w-1 rounded-full bg-[#A6FF00]" />3-month launch campaign | June 1 - August 31</div>
-            <h1 className="max-w-4xl text-5xl font-black leading-[0.9] tracking-[-0.07em] text-white md:text-7xl">Pitchr Launch Strategy</h1>
+            <div className="absolute right-0 top-0 text-2xl font-extrabold tracking-[-0.045em] text-white">Pitchr<span className="text-[#A6FF00]">.</span></div>
+            <div className="mb-4 inline-flex items-center gap-1 rounded-full border border-[#A6FF00]/40 bg-[#A6FF00]/10 px-2.5 py-1 text-[10px] font-semibold text-[#A6FF00]"><span className="h-1 w-1 rounded-full bg-[#A6FF00]" />3-month launch campaign | June 1 - August 31</div>
+            <h1 className="max-w-4xl text-4xl font-extrabold leading-[0.98] tracking-[-0.055em] text-white md:text-6xl">Pitchr Launch Strategy</h1>
           </div>
         </section>
         <nav className="flex overflow-x-auto border-b border-[#A6FF00]/15 bg-[#050505] px-2.5 md:px-4" aria-label="Guide navigation">
-          {tabs.map((tab, index) => <button key={tab} type="button" onClick={() => goTo(index)} className={`whitespace-nowrap border-b-2 px-4 py-4 text-xs font-bold tracking-tight transition ${cur === index ? 'border-[#A6FF00] text-[#A6FF00]' : 'border-transparent text-white/35 hover:text-white/80'}`}>{tab}</button>)}
+          {tabs.map((tab, index) => <button key={tab} type="button" onClick={() => goTo(index)} className={`whitespace-nowrap border-b-2 px-4 py-3 text-xs font-semibold tracking-tight transition ${cur === index ? 'border-[#A6FF00] text-[#A6FF00]' : 'border-transparent text-white/35 hover:text-white/80'}`}>{tab}</button>)}
         </nav>
         <section className="h-[820px] overflow-y-auto [scrollbar-gutter:stable]"><div key={cur} className="h-full animate-[fadeIn_0.24s_ease]"><Page /></div></section>
         <footer className="flex items-center justify-between border-t border-[#A6FF00]/15 bg-[#050505] px-3 py-4 md:px-5">
